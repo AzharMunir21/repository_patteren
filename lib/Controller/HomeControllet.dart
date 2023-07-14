@@ -26,11 +26,21 @@ class HomeController extends GetxController {
   }
 
   Future<void> addBook(Book book) {
+    getWait();
     return _bookRepo.insert(book);
+  }
+
+  getWait() {
+    Future.delayed(const Duration(milliseconds: 500)).then((value) {
+      getAllBooks();
+      list;
+      update();
+    });
   }
 
   Future<void> removeBook(int id) {
     return _bookRepo.delete(id).then((value) {
+      Future.delayed(const Duration(milliseconds: 500));
       getAllBooks();
     });
   }
@@ -54,6 +64,8 @@ class HomeController extends GetxController {
     print(titleFieldController.value.text);
     print(yearFieldController.value.text);
     _bookRepo.update(book);
+    Future.delayed(const Duration(milliseconds: 500));
+    getAllBooks();
     updateFunEnable.value = false;
   }
 }

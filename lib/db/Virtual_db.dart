@@ -62,8 +62,8 @@ class VirtualDB {
   update(Map<String, dynamic> updatedItem) async {
     Database? db = await database;
     int ids = updatedItem[id];
-    return db!
-        .update(tableName, updatedItem, where: "$id : ?", whereArgs: [ids]);
+    return await db!
+        .update(tableName, updatedItem, where: "$id= ?", whereArgs: [ids]);
   }
 
   readRecord() async {
