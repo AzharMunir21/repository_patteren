@@ -1,9 +1,9 @@
 import '../models/booksModel.dart';
 
 abstract class IBookRepository {
-  Future<List<Book>> getAll();
+  getAll();
   Future<Book?> getOne(int id);
   Future<void> insert(Book book);
-  Future<void> update(Book book);
+  update(Map<String, dynamic> book);
   Future<void> delete(int id);
 }

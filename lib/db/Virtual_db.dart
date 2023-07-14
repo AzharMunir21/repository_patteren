@@ -37,8 +37,8 @@ class VirtualDB {
   onCreate(Database db, int version) async {
     await db.execute('''create table $tableName 
     ($id integer primary key autoincrement,  
-    $bookTitle Text Not Null,
-    $bookYear Text Not Null);
+    $bookTitle Text,
+    $bookYear Text)
     ''');
   }
   // onCreate(Database db, int version) async {
@@ -57,7 +57,6 @@ class VirtualDB {
   delRecord(int ids) async {
     Database? db = await database;
     return db!.delete(tableName, where: "$id= ?", whereArgs: [ids]);
-    // _items.removeWhere((item) => item['id'] == id);
   }
 
   update(Map<String, dynamic> updatedItem) async {
@@ -65,8 +64,6 @@ class VirtualDB {
     int ids = updatedItem[id];
     return db!
         .update(tableName, updatedItem, where: "$id : ?", whereArgs: [ids]);
-    // int i = _items.indexWhere((item) => item['id'] == updatedItem['id']);
-    // _items[i] = updatedItem;
   }
 
   readRecord() async {

@@ -8,9 +8,10 @@ class BookRepository implements IBookRepository {
   BookRepository(this._db);
 
   @override
-  Future<List<Book>> getAll() async {
-    var items = await _db.list();
-    return items.map((item) => Book.fromMap(item)).toList();
+  getAll() async {
+    // var items = await _db.list();
+    return _db.readRecord();
+    // items.map((item) => Book.fromMap(item)).toList();
   }
 
   @override
@@ -21,12 +22,13 @@ class BookRepository implements IBookRepository {
 
   @override
   Future<void> insert(Book book) async {
+    print(book.toMap());
     await _db.insert(book.toMap());
   }
 
   @override
-  Future<void> update(Book book) async {
-    await _db.update(book.toMap());
+  update(Map<String, dynamic> item) async {
+    await _db.update(item);
   }
 
   @override
